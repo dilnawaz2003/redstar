@@ -1,0 +1,1 @@
+{"version":3,"file":"getUserWorkspaces.d.ts","sourceRoot":"","sources":["../../../src/controllers/workspace/getUserWorkspaces.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,YAAY,EAAE,OAAO,EAAE,QAAQ,EAAE,MAAM,SAAS,CAAC;AAK/D,QAAA,MAAM,iBAAiB,GAAU,KAAI,OAAO,EAAC,KAAI,QAAQ,EAAC,MAAK,YAAY,4DAwC1E,CAAA;AAGD,eAAe,iBAAiB,CAAC"}
