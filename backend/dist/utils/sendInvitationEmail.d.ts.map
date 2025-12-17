@@ -1,0 +1,1 @@
+{"version":3,"file":"sendInvitationEmail.d.ts","sourceRoot":"","sources":["../../src/utils/sendInvitationEmail.ts"],"names":[],"mappings":"AAEA,UAAU,wBAAwB;IAChC,EAAE,EAAE,MAAM,CAAC;IACX,WAAW,EAAE,MAAM,CAAC;IACpB,aAAa,EAAE,MAAM,CAAC;IACtB,UAAU,EAAE,MAAM,CAAC;CACpB;AAED,eAAO,MAAM,mBAAmB,GAAU,iDAKvC,wBAAwB,KAAG,OAAO,CAAC,IAAI,CAgDzC,CAAC"}

@@ -78,13 +78,13 @@ export default function CreateProjectModal({
         <DialogTrigger asChild>{trigger}</DialogTrigger>
       ) : (
         <DialogTrigger asChild>
-          <Button className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800">
+          <Button className="bg-linear-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800">
             Create Project
           </Button>
         </DialogTrigger>
       )}
       
-      <DialogContent className="sm:max-w-[425px] border-red-200 dark:border-red-900">
+      <DialogContent className="sm:max-w-1/2 border-red-200 dark:border-red-900">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold text-gray-900 dark:text-white">
             Create New Project

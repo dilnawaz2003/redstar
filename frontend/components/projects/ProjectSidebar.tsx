@@ -15,6 +15,8 @@ import {
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
+import { useGetWorkspaceMembersQuery } from '@/lib/api/apiSlice';
+import { useParams } from 'next/navigation';
 
 interface ProjectSidebarProps {
   project: any;
@@ -32,17 +34,13 @@ export default function ProjectSidebar({ project, taskStats }: ProjectSidebarPro
     ? Math.round((taskStats.done / taskStats.total) * 100) 
     : 0;
 
-  const members = [
-    { id: 1, name: 'You', role: 'Admin', avatar: 'Y' },
-    { id: 2, name: 'Alex Johnson', role: 'Member', avatar: 'AJ' },
-    { id: 3, name: 'Sarah Miller', role: 'Member', avatar: 'SM' },
-  ];
-
-  const recentActivities = [
-    { id: 1, user: 'You', action: 'created task', task: 'Design review', time: '2 hours ago' },
-    { id: 2, user: 'Alex Johnson', action: 'updated task', task: 'API integration', time: '4 hours ago' },
-    { id: 3, user: 'Sarah Miller', action: 'completed task', task: 'User testing', time: '1 day ago' },
-  ];
+    const params = useParams()
+    const workspaceId = params.id as string; 
+    const { data, isLoading: isLoadingMembers } = useGetWorkspaceMembersQuery(workspaceId, {
+        skip: !workspaceId,
+      });
+    
+    const members = data?.data;
 
   return (
     <div className="space-y-4">
@@ -144,23 +142,23 @@ export default function ProjectSidebar({ project, taskStats }: ProjectSidebarPro
               Team Members
             </CardTitle>
             <Badge variant="outline" className="border-red-200 text-red-700 dark:border-red-900 dark:text-red-400">
-              {members.length}
+              {members?.length}
             </Badge>
           </div>
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
-            {members.map((member) => (
+            {members?.map((member) => (
               <div key={member.id} className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
                   <Avatar className="h-8 w-8">
-                    <AvatarFallback className="bg-gradient-to-r from-red-600 to-red-700 text-white text-xs">
-                      {member.avatar}
+                    <AvatarFallback className="bg-linear-to-r from-red-600 to-red-700 text-white text-xs">
+                      {member.user?.name?.charAt(0)}
                     </AvatarFallback>
                   </Avatar>
                   <div>
                     <p className="text-sm font-medium text-gray-900 dark:text-white">
-                      {member.name}
+                      {member?.user.name}
                     </p>
                     <p className="text-xs text-gray-500 dark:text-gray-400">
                       {member.role}

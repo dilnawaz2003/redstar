@@ -2,7 +2,7 @@ import { prisma } from "../../config/prisma.js";
 import sendResponse from "../../utils/sendResponse.js";
 const getTasks = async (req, res, next) => {
     try {
-        const { project, status, assignedTo, priority } = req.query;
+        const { project, status, assignedTo, priority, search } = req.query;
         const userId = req.user.id;
         const where = {
             project: {
@@ -18,14 +18,19 @@ const getTasks = async (req, res, next) => {
         if (project) {
             where.projectId = project;
         }
-        if (status) {
+        if (status && status !== 'all') {
             where.status = status;
         }
-        if (assignedTo) {
+        if (assignedTo && assignedTo !== 'all') {
             where.assignedTo = assignedTo;
         }
-        if (priority) {
+        if (priority && priority !== 'all') {
             where.priority = priority;
+        }
+        if (search && search.toString().trim() !== "") {
+            where.title = {
+                contains: search,
+            };
         }
         const tasks = await prisma.task.findMany({
             where,

@@ -142,6 +142,7 @@ export type UserWhereInput = {
     workspaceMembers?: Prisma.WorkspaceMemberListRelationFilter;
     assignedTasks?: Prisma.TaskListRelationFilter;
     activityLogs?: Prisma.ActivityLogListRelationFilter;
+    sentInvitations?: Prisma.WorkspaceInvitationListRelationFilter;
 };
 export type UserOrderByWithRelationInput = {
     id?: Prisma.SortOrder;
@@ -153,6 +154,7 @@ export type UserOrderByWithRelationInput = {
     workspaceMembers?: Prisma.WorkspaceMemberOrderByRelationAggregateInput;
     assignedTasks?: Prisma.TaskOrderByRelationAggregateInput;
     activityLogs?: Prisma.ActivityLogOrderByRelationAggregateInput;
+    sentInvitations?: Prisma.WorkspaceInvitationOrderByRelationAggregateInput;
 };
 export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: string;
@@ -167,6 +169,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
     workspaceMembers?: Prisma.WorkspaceMemberListRelationFilter;
     assignedTasks?: Prisma.TaskListRelationFilter;
     activityLogs?: Prisma.ActivityLogListRelationFilter;
+    sentInvitations?: Prisma.WorkspaceInvitationListRelationFilter;
 }, "id" | "email">;
 export type UserOrderByWithAggregationInput = {
     id?: Prisma.SortOrder;
@@ -198,6 +201,7 @@ export type UserCreateInput = {
     workspaceMembers?: Prisma.WorkspaceMemberCreateNestedManyWithoutUserInput;
     assignedTasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput;
     activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput;
+    sentInvitations?: Prisma.WorkspaceInvitationCreateNestedManyWithoutInvitedByInput;
 };
 export type UserUncheckedCreateInput = {
     id?: string;
@@ -209,6 +213,7 @@ export type UserUncheckedCreateInput = {
     workspaceMembers?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutUserInput;
     assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput;
     activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput;
+    sentInvitations?: Prisma.WorkspaceInvitationUncheckedCreateNestedManyWithoutInvitedByInput;
 };
 export type UserUpdateInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
@@ -220,6 +225,7 @@ export type UserUpdateInput = {
     workspaceMembers?: Prisma.WorkspaceMemberUpdateManyWithoutUserNestedInput;
     assignedTasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput;
     activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput;
+    sentInvitations?: Prisma.WorkspaceInvitationUpdateManyWithoutInvitedByNestedInput;
 };
 export type UserUncheckedUpdateInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
@@ -231,6 +237,7 @@ export type UserUncheckedUpdateInput = {
     workspaceMembers?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutUserNestedInput;
     assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput;
     activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput;
+    sentInvitations?: Prisma.WorkspaceInvitationUncheckedUpdateManyWithoutInvitedByNestedInput;
 };
 export type UserCreateManyInput = {
     id?: string;
@@ -312,6 +319,18 @@ export type UserUpdateOneRequiredWithoutWorkspaceMembersNestedInput = {
     connect?: Prisma.UserWhereUniqueInput;
     update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutWorkspaceMembersInput, Prisma.UserUpdateWithoutWorkspaceMembersInput>, Prisma.UserUncheckedUpdateWithoutWorkspaceMembersInput>;
 };
+export type UserCreateNestedOneWithoutSentInvitationsInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutSentInvitationsInput, Prisma.UserUncheckedCreateWithoutSentInvitationsInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutSentInvitationsInput;
+    connect?: Prisma.UserWhereUniqueInput;
+};
+export type UserUpdateOneRequiredWithoutSentInvitationsNestedInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutSentInvitationsInput, Prisma.UserUncheckedCreateWithoutSentInvitationsInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutSentInvitationsInput;
+    upsert?: Prisma.UserUpsertWithoutSentInvitationsInput;
+    connect?: Prisma.UserWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSentInvitationsInput, Prisma.UserUpdateWithoutSentInvitationsInput>, Prisma.UserUncheckedUpdateWithoutSentInvitationsInput>;
+};
 export type UserCreateNestedOneWithoutAssignedTasksInput = {
     create?: Prisma.XOR<Prisma.UserCreateWithoutAssignedTasksInput, Prisma.UserUncheckedCreateWithoutAssignedTasksInput>;
     connectOrCreate?: Prisma.UserCreateOrConnectWithoutAssignedTasksInput;
@@ -347,6 +366,7 @@ export type UserCreateWithoutCreatedWorkspacesInput = {
     workspaceMembers?: Prisma.WorkspaceMemberCreateNestedManyWithoutUserInput;
     assignedTasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput;
     activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput;
+    sentInvitations?: Prisma.WorkspaceInvitationCreateNestedManyWithoutInvitedByInput;
 };
 export type UserUncheckedCreateWithoutCreatedWorkspacesInput = {
     id?: string;
@@ -357,6 +377,7 @@ export type UserUncheckedCreateWithoutCreatedWorkspacesInput = {
     workspaceMembers?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutUserInput;
     assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput;
     activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput;
+    sentInvitations?: Prisma.WorkspaceInvitationUncheckedCreateNestedManyWithoutInvitedByInput;
 };
 export type UserCreateOrConnectWithoutCreatedWorkspacesInput = {
     where: Prisma.UserWhereUniqueInput;
@@ -380,6 +401,7 @@ export type UserUpdateWithoutCreatedWorkspacesInput = {
     workspaceMembers?: Prisma.WorkspaceMemberUpdateManyWithoutUserNestedInput;
     assignedTasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput;
     activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput;
+    sentInvitations?: Prisma.WorkspaceInvitationUpdateManyWithoutInvitedByNestedInput;
 };
 export type UserUncheckedUpdateWithoutCreatedWorkspacesInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
@@ -390,6 +412,7 @@ export type UserUncheckedUpdateWithoutCreatedWorkspacesInput = {
     workspaceMembers?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutUserNestedInput;
     assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput;
     activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput;
+    sentInvitations?: Prisma.WorkspaceInvitationUncheckedUpdateManyWithoutInvitedByNestedInput;
 };
 export type UserCreateWithoutWorkspaceMembersInput = {
     id?: string;
@@ -400,6 +423,7 @@ export type UserCreateWithoutWorkspaceMembersInput = {
     createdWorkspaces?: Prisma.WorkspaceCreateNestedManyWithoutCreatorInput;
     assignedTasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput;
     activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput;
+    sentInvitations?: Prisma.WorkspaceInvitationCreateNestedManyWithoutInvitedByInput;
 };
 export type UserUncheckedCreateWithoutWorkspaceMembersInput = {
     id?: string;
@@ -410,6 +434,7 @@ export type UserUncheckedCreateWithoutWorkspaceMembersInput = {
     createdWorkspaces?: Prisma.WorkspaceUncheckedCreateNestedManyWithoutCreatorInput;
     assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput;
     activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput;
+    sentInvitations?: Prisma.WorkspaceInvitationUncheckedCreateNestedManyWithoutInvitedByInput;
 };
 export type UserCreateOrConnectWithoutWorkspaceMembersInput = {
     where: Prisma.UserWhereUniqueInput;
@@ -433,6 +458,7 @@ export type UserUpdateWithoutWorkspaceMembersInput = {
     createdWorkspaces?: Prisma.WorkspaceUpdateManyWithoutCreatorNestedInput;
     assignedTasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput;
     activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput;
+    sentInvitations?: Prisma.WorkspaceInvitationUpdateManyWithoutInvitedByNestedInput;
 };
 export type UserUncheckedUpdateWithoutWorkspaceMembersInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
@@ -441,6 +467,64 @@ export type UserUncheckedUpdateWithoutWorkspaceMembersInput = {
     password?: Prisma.StringFieldUpdateOperationsInput | string;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     createdWorkspaces?: Prisma.WorkspaceUncheckedUpdateManyWithoutCreatorNestedInput;
+    assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput;
+    activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput;
+    sentInvitations?: Prisma.WorkspaceInvitationUncheckedUpdateManyWithoutInvitedByNestedInput;
+};
+export type UserCreateWithoutSentInvitationsInput = {
+    id?: string;
+    name: string;
+    email: string;
+    password: string;
+    createdAt?: Date | string;
+    createdWorkspaces?: Prisma.WorkspaceCreateNestedManyWithoutCreatorInput;
+    workspaceMembers?: Prisma.WorkspaceMemberCreateNestedManyWithoutUserInput;
+    assignedTasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput;
+    activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput;
+};
+export type UserUncheckedCreateWithoutSentInvitationsInput = {
+    id?: string;
+    name: string;
+    email: string;
+    password: string;
+    createdAt?: Date | string;
+    createdWorkspaces?: Prisma.WorkspaceUncheckedCreateNestedManyWithoutCreatorInput;
+    workspaceMembers?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutUserInput;
+    assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput;
+    activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput;
+};
+export type UserCreateOrConnectWithoutSentInvitationsInput = {
+    where: Prisma.UserWhereUniqueInput;
+    create: Prisma.XOR<Prisma.UserCreateWithoutSentInvitationsInput, Prisma.UserUncheckedCreateWithoutSentInvitationsInput>;
+};
+export type UserUpsertWithoutSentInvitationsInput = {
+    update: Prisma.XOR<Prisma.UserUpdateWithoutSentInvitationsInput, Prisma.UserUncheckedUpdateWithoutSentInvitationsInput>;
+    create: Prisma.XOR<Prisma.UserCreateWithoutSentInvitationsInput, Prisma.UserUncheckedCreateWithoutSentInvitationsInput>;
+    where?: Prisma.UserWhereInput;
+};
+export type UserUpdateToOneWithWhereWithoutSentInvitationsInput = {
+    where?: Prisma.UserWhereInput;
+    data: Prisma.XOR<Prisma.UserUpdateWithoutSentInvitationsInput, Prisma.UserUncheckedUpdateWithoutSentInvitationsInput>;
+};
+export type UserUpdateWithoutSentInvitationsInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    createdWorkspaces?: Prisma.WorkspaceUpdateManyWithoutCreatorNestedInput;
+    workspaceMembers?: Prisma.WorkspaceMemberUpdateManyWithoutUserNestedInput;
+    assignedTasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput;
+    activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput;
+};
+export type UserUncheckedUpdateWithoutSentInvitationsInput = {
+    id?: Prisma.StringFieldUpdateOperationsInput | string;
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    createdWorkspaces?: Prisma.WorkspaceUncheckedUpdateManyWithoutCreatorNestedInput;
+    workspaceMembers?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutUserNestedInput;
     assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput;
     activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput;
 };
@@ -453,6 +537,7 @@ export type UserCreateWithoutAssignedTasksInput = {
     createdWorkspaces?: Prisma.WorkspaceCreateNestedManyWithoutCreatorInput;
     workspaceMembers?: Prisma.WorkspaceMemberCreateNestedManyWithoutUserInput;
     activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutUserInput;
+    sentInvitations?: Prisma.WorkspaceInvitationCreateNestedManyWithoutInvitedByInput;
 };
 export type UserUncheckedCreateWithoutAssignedTasksInput = {
     id?: string;
@@ -463,6 +548,7 @@ export type UserUncheckedCreateWithoutAssignedTasksInput = {
     createdWorkspaces?: Prisma.WorkspaceUncheckedCreateNestedManyWithoutCreatorInput;
     workspaceMembers?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutUserInput;
     activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutUserInput;
+    sentInvitations?: Prisma.WorkspaceInvitationUncheckedCreateNestedManyWithoutInvitedByInput;
 };
 export type UserCreateOrConnectWithoutAssignedTasksInput = {
     where: Prisma.UserWhereUniqueInput;
@@ -486,6 +572,7 @@ export type UserUpdateWithoutAssignedTasksInput = {
     createdWorkspaces?: Prisma.WorkspaceUpdateManyWithoutCreatorNestedInput;
     workspaceMembers?: Prisma.WorkspaceMemberUpdateManyWithoutUserNestedInput;
     activityLogs?: Prisma.ActivityLogUpdateManyWithoutUserNestedInput;
+    sentInvitations?: Prisma.WorkspaceInvitationUpdateManyWithoutInvitedByNestedInput;
 };
 export type UserUncheckedUpdateWithoutAssignedTasksInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
@@ -496,6 +583,7 @@ export type UserUncheckedUpdateWithoutAssignedTasksInput = {
     createdWorkspaces?: Prisma.WorkspaceUncheckedUpdateManyWithoutCreatorNestedInput;
     workspaceMembers?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutUserNestedInput;
     activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutUserNestedInput;
+    sentInvitations?: Prisma.WorkspaceInvitationUncheckedUpdateManyWithoutInvitedByNestedInput;
 };
 export type UserCreateWithoutActivityLogsInput = {
     id?: string;
@@ -506,6 +594,7 @@ export type UserCreateWithoutActivityLogsInput = {
     createdWorkspaces?: Prisma.WorkspaceCreateNestedManyWithoutCreatorInput;
     workspaceMembers?: Prisma.WorkspaceMemberCreateNestedManyWithoutUserInput;
     assignedTasks?: Prisma.TaskCreateNestedManyWithoutAssigneeInput;
+    sentInvitations?: Prisma.WorkspaceInvitationCreateNestedManyWithoutInvitedByInput;
 };
 export type UserUncheckedCreateWithoutActivityLogsInput = {
     id?: string;
@@ -516,6 +605,7 @@ export type UserUncheckedCreateWithoutActivityLogsInput = {
     createdWorkspaces?: Prisma.WorkspaceUncheckedCreateNestedManyWithoutCreatorInput;
     workspaceMembers?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutUserInput;
     assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssigneeInput;
+    sentInvitations?: Prisma.WorkspaceInvitationUncheckedCreateNestedManyWithoutInvitedByInput;
 };
 export type UserCreateOrConnectWithoutActivityLogsInput = {
     where: Prisma.UserWhereUniqueInput;
@@ -539,6 +629,7 @@ export type UserUpdateWithoutActivityLogsInput = {
     createdWorkspaces?: Prisma.WorkspaceUpdateManyWithoutCreatorNestedInput;
     workspaceMembers?: Prisma.WorkspaceMemberUpdateManyWithoutUserNestedInput;
     assignedTasks?: Prisma.TaskUpdateManyWithoutAssigneeNestedInput;
+    sentInvitations?: Prisma.WorkspaceInvitationUpdateManyWithoutInvitedByNestedInput;
 };
 export type UserUncheckedUpdateWithoutActivityLogsInput = {
     id?: Prisma.StringFieldUpdateOperationsInput | string;
@@ -549,6 +640,7 @@ export type UserUncheckedUpdateWithoutActivityLogsInput = {
     createdWorkspaces?: Prisma.WorkspaceUncheckedUpdateManyWithoutCreatorNestedInput;
     workspaceMembers?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutUserNestedInput;
     assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutAssigneeNestedInput;
+    sentInvitations?: Prisma.WorkspaceInvitationUncheckedUpdateManyWithoutInvitedByNestedInput;
 };
 /**
  * Count Type UserCountOutputType
@@ -558,12 +650,14 @@ export type UserCountOutputType = {
     workspaceMembers: number;
     assignedTasks: number;
     activityLogs: number;
+    sentInvitations: number;
 };
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     createdWorkspaces?: boolean | UserCountOutputTypeCountCreatedWorkspacesArgs;
     workspaceMembers?: boolean | UserCountOutputTypeCountWorkspaceMembersArgs;
     assignedTasks?: boolean | UserCountOutputTypeCountAssignedTasksArgs;
     activityLogs?: boolean | UserCountOutputTypeCountActivityLogsArgs;
+    sentInvitations?: boolean | UserCountOutputTypeCountSentInvitationsArgs;
 };
 /**
  * UserCountOutputType without action
@@ -598,6 +692,12 @@ export type UserCountOutputTypeCountAssignedTasksArgs<ExtArgs extends runtime.Ty
 export type UserCountOutputTypeCountActivityLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     where?: Prisma.ActivityLogWhereInput;
 };
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSentInvitationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.WorkspaceInvitationWhereInput;
+};
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
     name?: boolean;
@@ -608,6 +708,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
     workspaceMembers?: boolean | Prisma.User$workspaceMembersArgs<ExtArgs>;
     assignedTasks?: boolean | Prisma.User$assignedTasksArgs<ExtArgs>;
     activityLogs?: boolean | Prisma.User$activityLogsArgs<ExtArgs>;
+    sentInvitations?: boolean | Prisma.User$sentInvitationsArgs<ExtArgs>;
     _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["user"]>;
 export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -637,6 +738,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
     workspaceMembers?: boolean | Prisma.User$workspaceMembersArgs<ExtArgs>;
     assignedTasks?: boolean | Prisma.User$assignedTasksArgs<ExtArgs>;
     activityLogs?: boolean | Prisma.User$activityLogsArgs<ExtArgs>;
+    sentInvitations?: boolean | Prisma.User$sentInvitationsArgs<ExtArgs>;
     _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>;
 };
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {};
@@ -648,6 +750,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
         workspaceMembers: Prisma.$WorkspaceMemberPayload<ExtArgs>[];
         assignedTasks: Prisma.$TaskPayload<ExtArgs>[];
         activityLogs: Prisma.$ActivityLogPayload<ExtArgs>[];
+        sentInvitations: Prisma.$WorkspaceInvitationPayload<ExtArgs>[];
     };
     scalars: runtime.Types.Extensions.GetPayloadResult<{
         id: string;
@@ -988,6 +1091,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
     workspaceMembers<T extends Prisma.User$workspaceMembersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$workspaceMembersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WorkspaceMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     assignedTasks<T extends Prisma.User$assignedTasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$assignedTasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     activityLogs<T extends Prisma.User$activityLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$activityLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
+    sentInvitations<T extends Prisma.User$sentInvitationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sentInvitationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WorkspaceInvitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1479,6 +1583,29 @@ export type User$activityLogsArgs<ExtArgs extends runtime.Types.Extensions.Inter
     take?: number;
     skip?: number;
     distinct?: Prisma.ActivityLogScalarFieldEnum | Prisma.ActivityLogScalarFieldEnum[];
+};
+/**
+ * User.sentInvitations
+ */
+export type User$sentInvitationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkspaceInvitation
+     */
+    select?: Prisma.WorkspaceInvitationSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the WorkspaceInvitation
+     */
+    omit?: Prisma.WorkspaceInvitationOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.WorkspaceInvitationInclude<ExtArgs> | null;
+    where?: Prisma.WorkspaceInvitationWhereInput;
+    orderBy?: Prisma.WorkspaceInvitationOrderByWithRelationInput | Prisma.WorkspaceInvitationOrderByWithRelationInput[];
+    cursor?: Prisma.WorkspaceInvitationWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: Prisma.WorkspaceInvitationScalarFieldEnum | Prisma.WorkspaceInvitationScalarFieldEnum[];
 };
 /**
  * User without action

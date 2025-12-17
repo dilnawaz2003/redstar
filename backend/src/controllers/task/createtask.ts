@@ -35,7 +35,7 @@ const createTask = async (req:Request,res:Response,next:NextFunction) => {
           description: description,
           status: status,
           priority: priority,
-          dueDate: dueDate,
+          dueDate: dueDate ?  new Date(dueDate) : null, 
           assignedTo: assignedTo,
           projectId: projectId,
         },
@@ -57,7 +57,6 @@ const createTask = async (req:Request,res:Response,next:NextFunction) => {
         },
       });
 
-      // Create activity log
       await tx.activityLog.create({
         data: {
           taskId: task.id,
@@ -76,6 +75,7 @@ const createTask = async (req:Request,res:Response,next:NextFunction) => {
 
     sendResponse(res,201,true,"Task Created",task)
   } catch (error) {
+    console.log('create task error : ',error)
     next(error)
     }
 }

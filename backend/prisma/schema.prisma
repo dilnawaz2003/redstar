@@ -23,6 +23,7 @@ model User {
   workspaceMembers  WorkspaceMember[]
   assignedTasks     Task[] @relation("TaskAssignee")
   activityLogs      ActivityLog[]
+  sentInvitations   WorkspaceInvitation[] @relation("SentInvitations")
   
   @@map("users")
 }
@@ -36,6 +37,7 @@ model Workspace {
   creator     User      @relation("WorkspaceCreator", fields: [createdById], references: [id])
   members     WorkspaceMember[]
   projects    Project[]
+   invitations WorkspaceInvitation[]
   
   @@map("workspaces")
 }
@@ -51,6 +53,24 @@ model WorkspaceMember {
   
   @@unique([workspaceId, userId])
   @@map("workspace_members")
+}
+
+model WorkspaceInvitation {
+  id          String    @id @default(cuid())
+  workspaceId String    @map("workspace_id")
+  email       String
+  token       String    @unique
+  role        String    @default("member") // 'owner', 'admin', 'member', 'viewer'
+  invitedById String    @map("invited_by_id")
+  expiresAt   DateTime  @map("expires_at")
+  status      String    @default("pending") // 'pending', 'accepted', 'expired', 'revoked'
+  acceptedAt  DateTime? @map("accepted_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  invitedBy   User      @relation("SentInvitations", fields: [invitedById], references: [id])
+  
+  @@map("workspace_invitations")
 }
 
 model Project {
@@ -92,7 +112,7 @@ model ActivityLog {
   details     Json?     // Store change details
   createdAt   DateTime  @default(now()) @map("created_at")
   
-  task        Task      @relation(fields: [taskId], references: [id])
+  task        Task      @relation(fields: [taskId], references: [id],onDelete: Cascade)
   user        User      @relation(fields: [userId], references: [id])
   
   @@map("activity_logs")

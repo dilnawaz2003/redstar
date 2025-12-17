@@ -1,7 +1,7 @@
 // components/tasks/TaskFilters.tsx
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -35,7 +35,7 @@ export default function TaskFilters({
   hasActiveFilters = false 
 }: TaskFiltersProps) {
   const [showFilters, setShowFilters] = useState(false);
-  const [search, setSearch] = useState(filters.search || '');
+  const [search, setSearch] = useState(filters?.search || '');
 
   const handleSearch = (value: string) => {
     setSearch(value);
@@ -124,7 +124,7 @@ export default function TaskFilters({
                 <SelectValue placeholder="All statuses" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All Statuses</SelectItem>
+                <SelectItem value="all">All Statuses</SelectItem>
                 <SelectItem value="todo">To Do</SelectItem>
                 <SelectItem value="in_progress">In Progress</SelectItem>
                 <SelectItem value="review">Review</SelectItem>
@@ -142,7 +142,7 @@ export default function TaskFilters({
                 <SelectValue placeholder="All priorities" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All Priorities</SelectItem>
+                <SelectItem value="all">All Priorities</SelectItem>
                 <SelectItem value="low">Low</SelectItem>
                 <SelectItem value="medium">Medium</SelectItem>
                 <SelectItem value="high">High</SelectItem>
@@ -160,7 +160,7 @@ export default function TaskFilters({
                 <SelectValue placeholder="All assignees" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All Assignees</SelectItem>
+                <SelectItem value="all">All Assignees</SelectItem>
                 <SelectItem value="unassigned">Unassigned</SelectItem>
                 <SelectItem value="me">Assigned to me</SelectItem>
               </SelectContent>

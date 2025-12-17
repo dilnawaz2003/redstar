@@ -71,6 +71,7 @@ export const ModelName = {
     User: 'User',
     Workspace: 'Workspace',
     WorkspaceMember: 'WorkspaceMember',
+    WorkspaceInvitation: 'WorkspaceInvitation',
     Project: 'Project',
     Task: 'Task',
     ActivityLog: 'ActivityLog'
@@ -102,6 +103,18 @@ export const WorkspaceMemberScalarFieldEnum = {
     workspaceId: 'workspaceId',
     userId: 'userId',
     role: 'role'
+};
+export const WorkspaceInvitationScalarFieldEnum = {
+    id: 'id',
+    workspaceId: 'workspaceId',
+    email: 'email',
+    token: 'token',
+    role: 'role',
+    invitedById: 'invitedById',
+    expiresAt: 'expiresAt',
+    status: 'status',
+    acceptedAt: 'acceptedAt',
+    createdAt: 'createdAt'
 };
 export const ProjectScalarFieldEnum = {
     id: 'id',

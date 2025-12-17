@@ -90,13 +90,9 @@ export default function DashboardPage() {
             Manage your workspaces and collaborate with your team
           </p>
         </div>
-        <Button
-          onClick={() => setIsCreateModalOpen(true)}
-          className="bg-linear-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800"
-        >
-          <Plus className="mr-2 h-4 w-4" />
-          New Workspace
-        </Button>
+         <CreateWorkspaceModal
+            onSuccess={() => setIsCreateModalOpen(false)}
+         />
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">

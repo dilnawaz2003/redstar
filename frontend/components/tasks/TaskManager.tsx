@@ -26,7 +26,6 @@ export default function TaskManager({
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [filters, setFilters] = useState(initialFilters);
   
-  // Use RTK Query hooks directly
   const { 
     data: tasksData, 
     isLoading, 
@@ -38,13 +37,11 @@ export default function TaskManager({
 
   const [createTask, { isLoading: isCreating }] = useCreateTaskMutation();
 
-  // Transform tasks data from API response
   const tasks = useMemo(() => {
     if (!tasksData?.data) return [];
     return tasksData.data;
   }, [tasksData]);
 
-  // Group tasks by status for TaskBoard
   const tasksByStatus = useMemo(() => {
     return {
       todo: tasks.filter(task => task.status === 'todo'),
@@ -71,7 +68,7 @@ export default function TaskManager({
       }).unwrap();
       toast.success('Task created successfully');
       setIsCreateModalOpen(false);
-      refetch(); // Refresh the task list
+      refetch(); 
     } catch (error: any) {
       toast.error(error?.data?.error || 'Failed to create task');
       console.error('Failed to create task:', error);
@@ -100,7 +97,7 @@ export default function TaskManager({
         />
         <Button 
           onClick={() => setIsCreateModalOpen(true)}
-          className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800"
+          className="bg-linear-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800"
           disabled={isLoading || isCreating}
         >
           <Plus className="mr-2 h-4 w-4" />
@@ -124,7 +121,6 @@ export default function TaskManager({
       ) : (
         <TaskBoard 
           columns={tasksByStatus} 
-          onTaskUpdate={refetch}
         />
       )}
 

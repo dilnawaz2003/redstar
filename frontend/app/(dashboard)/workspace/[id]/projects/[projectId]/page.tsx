@@ -82,7 +82,7 @@ export default function ProjectPage() {
         </p>
         <Button
           onClick={() => router.push(`/workspace/${workspaceId}`)}
-          className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800"
+          className="bg-linear-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Workspace
@@ -120,7 +120,7 @@ export default function ProjectPage() {
                 {project.name}
               </h1>
               <Badge variant="outline" className="border-red-200 text-red-700 dark:border-red-900 dark:text-red-400">
-                {project.workspace?.name || 'Workspace'}
+                {(project as any).workspace?.name || 'Workspace'}
               </Badge>
             </div>
             {project.description && (
@@ -142,7 +142,7 @@ export default function ProjectPage() {
         </div>
 
         {/* Progress Indicator */}
-        <div className="hidden md:flex items-center space-x-4">
+        {/* <div className="hidden md:flex items-center space-x-4">
           <div className="text-right">
             <div className="text-2xl font-bold text-gray-900 dark:text-white">
               {taskStats.progress}%
@@ -178,7 +178,7 @@ export default function ProjectPage() {
               </defs>
             </svg>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Task Board */}

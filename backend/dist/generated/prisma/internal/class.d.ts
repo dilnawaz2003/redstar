@@ -145,6 +145,17 @@ export interface PrismaClient<in LogOpts extends Prisma.LogLevel = never, in out
         omit: OmitOpts;
     }>;
     /**
+     * `prisma.workspaceInvitation`: Exposes CRUD operations for the **WorkspaceInvitation** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more WorkspaceInvitations
+      * const workspaceInvitations = await prisma.workspaceInvitation.findMany()
+      * ```
+      */
+    get workspaceInvitation(): Prisma.WorkspaceInvitationDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
      * `prisma.project`: Exposes CRUD operations for the **Project** model.
       * Example usage:
       * ```ts

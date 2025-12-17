@@ -234,6 +234,7 @@ export declare const ModelName: {
     readonly User: "User";
     readonly Workspace: "Workspace";
     readonly WorkspaceMember: "WorkspaceMember";
+    readonly WorkspaceInvitation: "WorkspaceInvitation";
     readonly Project: "Project";
     readonly Task: "Task";
     readonly ActivityLog: "ActivityLog";
@@ -249,7 +250,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         omit: GlobalOmitOptions;
     };
     meta: {
-        modelProps: "user" | "workspace" | "workspaceMember" | "project" | "task" | "activityLog";
+        modelProps: "user" | "workspace" | "workspaceMember" | "workspaceInvitation" | "project" | "task" | "activityLog";
         txIsolationLevel: TransactionIsolationLevel;
     };
     model: {
@@ -472,6 +473,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
                 count: {
                     args: Prisma.WorkspaceMemberCountArgs<ExtArgs>;
                     result: runtime.Types.Utils.Optional<Prisma.WorkspaceMemberCountAggregateOutputType> | number;
+                };
+            };
+        };
+        WorkspaceInvitation: {
+            payload: Prisma.$WorkspaceInvitationPayload<ExtArgs>;
+            fields: Prisma.WorkspaceInvitationFieldRefs;
+            operations: {
+                findUnique: {
+                    args: Prisma.WorkspaceInvitationFindUniqueArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkspaceInvitationPayload> | null;
+                };
+                findUniqueOrThrow: {
+                    args: Prisma.WorkspaceInvitationFindUniqueOrThrowArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkspaceInvitationPayload>;
+                };
+                findFirst: {
+                    args: Prisma.WorkspaceInvitationFindFirstArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkspaceInvitationPayload> | null;
+                };
+                findFirstOrThrow: {
+                    args: Prisma.WorkspaceInvitationFindFirstOrThrowArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkspaceInvitationPayload>;
+                };
+                findMany: {
+                    args: Prisma.WorkspaceInvitationFindManyArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkspaceInvitationPayload>[];
+                };
+                create: {
+                    args: Prisma.WorkspaceInvitationCreateArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkspaceInvitationPayload>;
+                };
+                createMany: {
+                    args: Prisma.WorkspaceInvitationCreateManyArgs<ExtArgs>;
+                    result: BatchPayload;
+                };
+                createManyAndReturn: {
+                    args: Prisma.WorkspaceInvitationCreateManyAndReturnArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkspaceInvitationPayload>[];
+                };
+                delete: {
+                    args: Prisma.WorkspaceInvitationDeleteArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkspaceInvitationPayload>;
+                };
+                update: {
+                    args: Prisma.WorkspaceInvitationUpdateArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkspaceInvitationPayload>;
+                };
+                deleteMany: {
+                    args: Prisma.WorkspaceInvitationDeleteManyArgs<ExtArgs>;
+                    result: BatchPayload;
+                };
+                updateMany: {
+                    args: Prisma.WorkspaceInvitationUpdateManyArgs<ExtArgs>;
+                    result: BatchPayload;
+                };
+                updateManyAndReturn: {
+                    args: Prisma.WorkspaceInvitationUpdateManyAndReturnArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkspaceInvitationPayload>[];
+                };
+                upsert: {
+                    args: Prisma.WorkspaceInvitationUpsertArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$WorkspaceInvitationPayload>;
+                };
+                aggregate: {
+                    args: Prisma.WorkspaceInvitationAggregateArgs<ExtArgs>;
+                    result: runtime.Types.Utils.Optional<Prisma.AggregateWorkspaceInvitation>;
+                };
+                groupBy: {
+                    args: Prisma.WorkspaceInvitationGroupByArgs<ExtArgs>;
+                    result: runtime.Types.Utils.Optional<Prisma.WorkspaceInvitationGroupByOutputType>[];
+                };
+                count: {
+                    args: Prisma.WorkspaceInvitationCountArgs<ExtArgs>;
+                    result: runtime.Types.Utils.Optional<Prisma.WorkspaceInvitationCountAggregateOutputType> | number;
                 };
             };
         };
@@ -753,6 +828,19 @@ export declare const WorkspaceMemberScalarFieldEnum: {
     readonly role: "role";
 };
 export type WorkspaceMemberScalarFieldEnum = (typeof WorkspaceMemberScalarFieldEnum)[keyof typeof WorkspaceMemberScalarFieldEnum];
+export declare const WorkspaceInvitationScalarFieldEnum: {
+    readonly id: "id";
+    readonly workspaceId: "workspaceId";
+    readonly email: "email";
+    readonly token: "token";
+    readonly role: "role";
+    readonly invitedById: "invitedById";
+    readonly expiresAt: "expiresAt";
+    readonly status: "status";
+    readonly acceptedAt: "acceptedAt";
+    readonly createdAt: "createdAt";
+};
+export type WorkspaceInvitationScalarFieldEnum = (typeof WorkspaceInvitationScalarFieldEnum)[keyof typeof WorkspaceInvitationScalarFieldEnum];
 export declare const ProjectScalarFieldEnum: {
     readonly id: "id";
     readonly workspaceId: "workspaceId";
@@ -940,6 +1028,7 @@ export type GlobalOmitConfig = {
     user?: Prisma.UserOmit;
     workspace?: Prisma.WorkspaceOmit;
     workspaceMember?: Prisma.WorkspaceMemberOmit;
+    workspaceInvitation?: Prisma.WorkspaceInvitationOmit;
     project?: Prisma.ProjectOmit;
     task?: Prisma.TaskOmit;
     activityLog?: Prisma.ActivityLogOmit;

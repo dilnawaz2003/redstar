@@ -29,6 +29,7 @@ export declare const ModelName: {
     readonly User: "User";
     readonly Workspace: "Workspace";
     readonly WorkspaceMember: "WorkspaceMember";
+    readonly WorkspaceInvitation: "WorkspaceInvitation";
     readonly Project: "Project";
     readonly Task: "Task";
     readonly ActivityLog: "ActivityLog";
@@ -63,6 +64,19 @@ export declare const WorkspaceMemberScalarFieldEnum: {
     readonly role: "role";
 };
 export type WorkspaceMemberScalarFieldEnum = (typeof WorkspaceMemberScalarFieldEnum)[keyof typeof WorkspaceMemberScalarFieldEnum];
+export declare const WorkspaceInvitationScalarFieldEnum: {
+    readonly id: "id";
+    readonly workspaceId: "workspaceId";
+    readonly email: "email";
+    readonly token: "token";
+    readonly role: "role";
+    readonly invitedById: "invitedById";
+    readonly expiresAt: "expiresAt";
+    readonly status: "status";
+    readonly acceptedAt: "acceptedAt";
+    readonly createdAt: "createdAt";
+};
+export type WorkspaceInvitationScalarFieldEnum = (typeof WorkspaceInvitationScalarFieldEnum)[keyof typeof WorkspaceInvitationScalarFieldEnum];
 export declare const ProjectScalarFieldEnum: {
     readonly id: "id";
     readonly workspaceId: "workspaceId";

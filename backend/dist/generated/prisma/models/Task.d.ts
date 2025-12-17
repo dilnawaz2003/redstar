@@ -433,9 +433,6 @@ export type TaskUncheckedUpdateManyWithoutProjectNestedInput = {
     updateMany?: Prisma.TaskUpdateManyWithWhereWithoutProjectInput | Prisma.TaskUpdateManyWithWhereWithoutProjectInput[];
     deleteMany?: Prisma.TaskScalarWhereInput | Prisma.TaskScalarWhereInput[];
 };
-export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null;
-};
 export type TaskCreateNestedOneWithoutActivityLogsInput = {
     create?: Prisma.XOR<Prisma.TaskCreateWithoutActivityLogsInput, Prisma.TaskUncheckedCreateWithoutActivityLogsInput>;
     connectOrCreate?: Prisma.TaskCreateOrConnectWithoutActivityLogsInput;

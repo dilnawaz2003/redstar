@@ -3,6 +3,7 @@
 // lib/redux/slices/authSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User } from '@/lib/types';
+import { api } from '@/lib/api/apiSlice';
 
 interface AuthState {
   user: User | null;
@@ -49,6 +50,21 @@ const authSlice = createSlice({
       localStorage.removeItem('user');
     },
   },
+ extraReducers: (builder) => {
+  builder
+    .addMatcher(
+      api.endpoints.getCurrentUser.matchFulfilled,
+      (state, { payload }) => {
+
+        if (payload?.success) {
+          state.user = payload.data;
+          localStorage.setItem('user', JSON.stringify(payload.data));
+        } else {
+          state.user = null;
+        }
+      }
+    )
+  }
 });
 
 export const { setCredentials, logout } = authSlice.actions;

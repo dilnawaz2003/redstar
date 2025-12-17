@@ -66,9 +66,19 @@ export const api = createApi({
       }),
       invalidatesTags: ['Auth'],
     }),
-    getCurrentUser: builder.query<User, void>({
+    getCurrentUser: builder.query<{data:User,success:boolean}, void>({
       query: () => '/auth/me',
       providesTags: ['Auth'],
+    }),
+    logout:builder.mutation<{data:{success:boolean}},void>({
+      query:() => ({
+        url:"/auth/logout",
+        method:"POST",
+      }),
+      invalidatesTags:['Auth']
+    }),
+    checkUserExist: builder.query<{data:{found:boolean,email?:string,workspaceName?:string,invitedBy?:string},success:boolean}, {token:string}>({
+      query: ({token}) => `/auth/userexist?token=${token}`,
     }),
 
     // Workspace endpoints
@@ -104,7 +114,7 @@ export const api = createApi({
         { type: 'Workspace', id: workspaceId },
       ],
     }),
-    getWorkspaceMembers: builder.query<WorkspaceMember[], string>({
+    getWorkspaceMembers: builder.query<{data:WorkspaceMember[]}, string>({
       query: (workspaceId) => `/workspaces/${workspaceId}/members`,
       providesTags: (result, error, workspaceId) => [
         { type: 'Workspace', id: workspaceId },
@@ -182,6 +192,22 @@ export const api = createApi({
         { type: 'Activity', id: taskId },
       ],
     }),
+
+    sendInvitation : builder.mutation<{data:{success:boolean}},{email:string,workspaceId:string,role:string}>({
+      query:(data) => ({
+        url:'/workspaces/invite',
+        method:"POST",
+        body:data
+      }),
+       invalidatesTags: (result, error, { workspaceId }) => [{ type: 'Workspace', id:workspaceId }],
+    }),
+    acceptInvitation : builder.mutation<{data:{success:boolean,workspaceId:string},message:string},{token:string,name?:string,password?:string}>({
+      query:(data) => ({
+        url:'/workspaces/accept',
+        method:"POST",
+        body:data
+      }),
+    }),
   }),
 });
 
@@ -190,6 +216,8 @@ export const {
   useLoginMutation,
   useRegisterMutation,
   useGetCurrentUserQuery,
+  useLogoutMutation,
+  useCheckUserExistQuery,
   
   // Workspace
   useGetWorkspacesQuery,
@@ -210,4 +238,7 @@ export const {
   useUpdateTaskMutation,
   useDeleteTaskMutation,
   useGetTaskActivityLogsQuery,
+
+  useSendInvitationMutation,
+  useAcceptInvitationMutation
 } = api;

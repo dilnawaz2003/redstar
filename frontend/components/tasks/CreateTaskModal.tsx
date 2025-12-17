@@ -1,7 +1,6 @@
-// components/tasks/CreateTaskModal.tsx (fix the Select component)
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -33,6 +32,8 @@ interface CreateTaskModalProps {
   workspaceId: string;
   onSubmit: (data: any) => Promise<void>;
   isSubmitting: boolean;
+  initialData?: any;
+  isEditMode?: boolean;
 }
 
 export default function CreateTaskModal({ 
@@ -41,14 +42,11 @@ export default function CreateTaskModal({
   projectId,
   workspaceId,
   onSubmit,
-  isSubmitting
+  isSubmitting,
+  initialData,
+  isEditMode = false
 }: CreateTaskModalProps) {
   const [date, setDate] = useState<Date>();
-
-  // Fetch workspace members using RTK Query hook
-  const { data: members = [], isLoading: isLoadingMembers } = useGetWorkspaceMembersQuery(workspaceId, {
-    skip: !workspaceId,
-  });
 
   const {
     register,
@@ -59,7 +57,7 @@ export default function CreateTaskModal({
     formState: { errors },
   } = useForm({
     resolver: zodResolver(taskSchema),
-    defaultValues: {
+    defaultValues: initialData || {
       title: '',
       description: '',
       status: 'todo' as const,
@@ -67,6 +65,23 @@ export default function CreateTaskModal({
       assignedTo: undefined as string | undefined,
     },
   });
+
+  useEffect(() => {
+    if (initialData) {
+      Object.keys(initialData).forEach((key) => {
+        setValue(key as any, initialData[key]);
+      });
+      if (initialData.dueDate) {
+        setDate(new Date(initialData.dueDate));
+      }
+    }
+  }, [initialData, setValue]);
+
+  const { data, isLoading: isLoadingMembers } = useGetWorkspaceMembersQuery(workspaceId, {
+    skip: !workspaceId,
+  });
+
+  const members = data?.data;
 
   const handleFormSubmit = async (data: any) => {
     try {
@@ -76,10 +91,12 @@ export default function CreateTaskModal({
         projectId,
       };
       await onSubmit(taskData);
-      reset();
-      setDate(undefined);
+      if (!isEditMode) {
+        reset();
+        setDate(undefined);
+      }
     } catch (error) {
-      console.error('Failed to create task:', error);
+      console.error('Failed to submit task:', error);
     }
   };
 
@@ -90,15 +107,15 @@ export default function CreateTaskModal({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent 
-        className="sm:max-w-[500px] border-red-200 dark:border-red-900"
+        className="sm:max-w-1/2 border-red-200 dark:border-red-900"
         aria-describedby="task-modal-description"
       >
         <DialogHeader>
           <DialogTitle className="text-xl font-bold text-gray-900 dark:text-white">
-            Create New Task
+            {isEditMode ? 'Edit Task' : 'Create New Task'}
           </DialogTitle>
           <DialogDescription id="task-modal-description">
-            Fill in the details below to create a new task
+            {isEditMode ? 'Update the task details below' : 'Fill in the details below to create a new task'}
           </DialogDescription>
         </DialogHeader>
 
@@ -115,7 +132,7 @@ export default function CreateTaskModal({
               )}
             />
             {errors.title && (
-              <p className="text-sm text-red-500">{errors.title.message}</p>
+              <p className="text-sm text-red-500">{`${errors?.title?.message}`}</p>
             )}
           </div>
 
@@ -137,7 +154,7 @@ export default function CreateTaskModal({
                 value={statusValue} 
                 onValueChange={(value) => setValue('status', value as any)}
               >
-                <SelectTrigger className="border-red-200 dark:border-red-900">
+                <SelectTrigger className="border-red-200 dark:border-red-900 w-full">
                   <SelectValue placeholder="Select status" />
                 </SelectTrigger>
                 <SelectContent>
@@ -155,7 +172,7 @@ export default function CreateTaskModal({
                 value={priorityValue} 
                 onValueChange={(value) => setValue('priority', value as any)}
               >
-                <SelectTrigger className="border-red-200 dark:border-red-900">
+                <SelectTrigger className="border-red-200 dark:border-red-900 w-full">
                   <SelectValue placeholder="Select priority" />
                 </SelectTrigger>
                 <SelectContent>
@@ -201,7 +218,7 @@ export default function CreateTaskModal({
                 value={assignedToValue} 
                 onValueChange={(value) => setValue('assignedTo', value)}
               >
-                <SelectTrigger className="border-red-200 dark:border-red-900">
+                <SelectTrigger className="border-red-200 dark:border-red-900 w-full">
                   <SelectValue placeholder="Unassigned" />
                 </SelectTrigger>
                 <SelectContent>
@@ -209,7 +226,7 @@ export default function CreateTaskModal({
                   {isLoadingMembers ? (
                     <SelectItem value="loading" disabled>Loading members...</SelectItem>
                   ) : (
-                    members.map((member) => {
+                   members && members?.map((member) => {
                       const memberId = member.userId || member.id;
                       const memberName = member.user?.name || 'Unknown Member';
                       return (
@@ -237,15 +254,15 @@ export default function CreateTaskModal({
             <Button
               type="submit"
               disabled={isSubmitting || isLoadingMembers}
-              className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800"
+              className="bg-linear-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800"
             >
               {isSubmitting ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Creating...
+                  {isEditMode ? 'Updating...' : 'Creating...'}
                 </>
               ) : (
-                'Create Task'
+                isEditMode ? 'Update Task' : 'Create Task'
               )}
             </Button>
           </DialogFooter>

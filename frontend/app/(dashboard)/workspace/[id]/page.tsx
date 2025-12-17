@@ -14,6 +14,7 @@ import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
 import { useGetProjectsQuery, useGetWorkspaceByIdQuery } from '@/lib/api/apiSlice';
 import CreateProjectModal from '@/components/projects/CreateprojectModal';
+import InviteMemberModal from '@/components/workspace/InviteMemberModal';
 
 export default function WorkspacePage() {
   const params = useParams();
@@ -92,9 +93,10 @@ export default function WorkspacePage() {
               </Button>
             }
           />
-          <Button variant="outline" className="border-red-200 text-red-600 hover:bg-red-50 dark:border-red-900 dark:text-red-400">
-            <Settings className="h-4 w-4" />
-          </Button>
+         <InviteMemberModal 
+          workspaceId={workspaceId}
+          onClose={() => {}}
+         />
         </div>
       </div>
 

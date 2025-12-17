@@ -5,7 +5,7 @@ import sendResponse from "../../utils/sendResponse.js";
 const getTasks = async (req:Request,res:Response,next:NextFunction) => {
     try {
 
-        const {project , status , assignedTo , priority} = req.query;
+        const {project , status , assignedTo , priority , search} = req.query;
            const userId = (req as any).user.id;
    
     const where: any = {
@@ -24,16 +24,22 @@ const getTasks = async (req:Request,res:Response,next:NextFunction) => {
       where.projectId = project;
     }
 
-    if (status) {
+    if (status && status !== 'all') {
       where.status = status;
     }
 
-    if (assignedTo) {
+    if (assignedTo && assignedTo !== 'all') {
       where.assignedTo = assignedTo;
     }
 
-    if (priority) {
+    if (priority && priority !== 'all') {
       where.priority = priority;
+    }
+
+    if (search && search.toString().trim() !== "") {
+      where.title = {
+        contains:search,
+      }
     }
 
     const tasks = await prisma.task.findMany({

@@ -52,9 +52,9 @@ export default function TaskBoard({ columns }: TaskBoardProps) {
         
         return (
           <Card key={key} className={`border ${config.borderColor}`}>
-            <CardHeader className={`pb-3 ${config.bgColor}`}>
+            <CardHeader className={` ${config.bgColor}`}>
               <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center py-2 space-x-2">
                   <Icon className={`h-5 w-5 ${config.color}`} />
                   <CardTitle className="text-sm font-medium">{config.title}</CardTitle>
                 </div>

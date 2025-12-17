@@ -1,21 +1,22 @@
-// app/page.tsx
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { 
-  CheckSquare, 
-  Users, 
-  FolderKanban, 
-  BarChart3, 
-  Shield, 
-  Zap,
-  ArrowRight,
-  Star,
-  Calendar
-} from 'lucide-react';
+'use client';
+
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useGetCurrentUserQuery } from '@/lib/api/apiSlice';
+import {
+  ArrowRight,
+  CheckSquare,
+  FolderKanban,
+  Star,
+  Users
+} from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+
+  const {isLoading , data} = useGetCurrentUserQuery()
+  const router = useRouter()
   const features = [
     {
       icon: CheckSquare,
@@ -64,6 +65,14 @@ export default function Home() {
     },
   ];
 
+
+  const hanldeClick = () => {
+    if (!isLoading && data?.success) return router.push("/dashboard");
+    if (!isLoading && !data?.success) return router.push("/login");
+  }
+
+
+
   return (
     <div className="min-h-screen bg-linear-to-b from-red-50 via-white to-red-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       {/* Hero Section */}
@@ -89,27 +98,13 @@ export default function Home() {
             </p>
             
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button
+           { <Button
                 size="lg"
-                className="bg-linear-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white shadow-lg shadow-red-500/25"
-                asChild
+                className="bg-linear-to-r bg-red-500 from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white shadow-lg shadow-red-500/25"
+                onClick={hanldeClick}
               >
-                <Link href="/register">
-                  Get Started Free
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-              
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-red-200 text-red-600 hover:bg-red-50 dark:border-red-900 dark:text-red-400"
-                asChild
-              >
-                <Link href="/login">
-                  Sign In
-                </Link>
-              </Button>
+                  Get Started
+              </Button> }   
             </div>
           </div>
         </div>

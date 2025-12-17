@@ -79,7 +79,7 @@ export default function CreateWorkspaceModal({
         </DialogTrigger>
       )}
       
-      <DialogContent className="sm:max-w-106.25 border-red-200 dark:border-red-900">
+      <DialogContent className="sm:max-w-1/2 border-red-200 dark:border-red-900">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold text-gray-900 dark:text-white">
             Create New Workspace

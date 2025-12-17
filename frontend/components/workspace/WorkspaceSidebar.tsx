@@ -152,9 +152,6 @@ export default function WorkspaceSidebar({ workspace }: WorkspaceSidebarProps) {
                       </p>
                     </div>
                   </div>
-                  <Button variant="ghost" size="icon" className="h-6 w-6">
-                    <MoreVertical className="h-4 w-4" />
-                  </Button>
                 </div>
               ))}
             </div>

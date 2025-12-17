@@ -35,6 +35,11 @@ export type Workspace = Prisma.WorkspaceModel;
  */
 export type WorkspaceMember = Prisma.WorkspaceMemberModel;
 /**
+ * Model WorkspaceInvitation
+ *
+ */
+export type WorkspaceInvitation = Prisma.WorkspaceInvitationModel;
+/**
  * Model Project
  *
  */
