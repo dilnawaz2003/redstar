@@ -128,7 +128,7 @@ export default function CreateProjectModal({
             <Button
               type="submit"
               disabled={isLoading}
-              className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800"
+              className="bg-linear-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800"
             >
               {isLoading ? (
                 <>

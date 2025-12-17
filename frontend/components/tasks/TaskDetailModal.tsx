@@ -366,7 +366,7 @@ export default function TaskDetailModal({
                   {task.assignee ? (
                     <>
                       <Avatar>
-                        <AvatarFallback className="bg-gradient-to-r from-red-600 to-red-700 text-white">
+                        <AvatarFallback className="bg-linear-to-r from-red-600 to-red-700 text-white">
                           {task.assignee.name.charAt(0)}
                         </AvatarFallback>
                       </Avatar>
@@ -402,7 +402,7 @@ export default function TaskDetailModal({
                     {task.project.name}
                   </p>
                   <p className="text-sm text-gray-600 dark:text-gray-400">
-                    {task.project.workspace?.name || 'Workspace'}
+                    {(task.project as any).workspace?.name || 'Workspace'}
                   </p>
                 </div>
               )}

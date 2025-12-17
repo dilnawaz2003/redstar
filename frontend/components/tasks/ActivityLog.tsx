@@ -1,7 +1,7 @@
 // components/tasks/ActivityLog.tsx
 'use client';
 
-import { useGetTaskActivityLogsQuery } from '@/lib/redux/api/apiSlice';
+import { useGetTaskActivityLogsQuery } from '@/lib/api/apiSlice';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -111,7 +111,7 @@ export default function ActivityLog({ taskId }: ActivityLogProps) {
               <div key={log.id} className="flex items-start space-x-3">
                 <div className="relative">
                   <Avatar className="h-10 w-10">
-                    <AvatarFallback className="bg-gradient-to-r from-red-600 to-red-700 text-white">
+                    <AvatarFallback className="bg-linear-to-r from-red-600 to-red-700 text-white">
                       {log.user.name.charAt(0)}
                     </AvatarFallback>
                   </Avatar>

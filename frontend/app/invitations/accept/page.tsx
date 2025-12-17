@@ -1,39 +1,35 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { 
-  Loader2, 
-  CheckCircle, 
-  XCircle, 
-  Mail, 
-  Users, 
-  Shield, 
-  User, 
-  Eye,
-  Calendar,
-  ArrowLeft,
-  UserCheck,
-  UserPlus
-} from 'lucide-react';
-import { toast } from 'sonner';
 import { useAcceptInvitationMutation, useCheckUserExistQuery } from '@/lib/api/apiSlice';
+import {
+  CheckCircle,
+  Eye,
+  Loader2,
+  Mail,
+  Shield,
+  User,
+  UserCheck,
+  UserPlus,
+  Users,
+  XCircle
+} from 'lucide-react';
+import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useState } from 'react';
+import { toast } from 'sonner';
 
 export default function AcceptInvitationPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const token = searchParams.get('token') as string;
   
-  // Check if user exists using the token
   const { isLoading: checkingUser, data: userCheckData, error: userCheckError } = useCheckUserExistQuery({ token }, {
     skip: !token,
   });
@@ -79,7 +75,6 @@ export default function AcceptInvitationPage() {
     return Object.keys(errors).length === 0;
   };
 
-  // Handle submission for existing users (just click button)
   const handleExistingUserJoin = async () => {
     if (!token) return;
     
@@ -96,7 +91,6 @@ export default function AcceptInvitationPage() {
     }
   };
 
-  // Handle submission for new users (with form)
   const handleNewUserSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
